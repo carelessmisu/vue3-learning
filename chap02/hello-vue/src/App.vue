@@ -1,25 +1,80 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue';
+import { computed, ref } from 'vue';
 
-const radiusInit = Math.round(Math.random() * 10);
+// const url = ref('https://vuejs.org/');
 
-// const PI = ref(3.14);
-// const radius = ref(radiusInit);
+// const isSendButtonDisabled = ref(true);
 
-const data = reactive({
-  PI: 3.14,
-  radius: radiusInit
+// const widthOrHeight = ref("height");
+// const widthOrHeightValue = ref(100);
+
+// const imageAttributes = ref({
+//   src: '/images/logo.svg',
+//   alt: 'VueLogo',
+//   width: 75,
+//   height: 75
+// });
+
+const msg = ref('Hello! World');
+const msgTextRed = ref('red');
+const msgTextColor = ref('white');
+const msgBgColor = ref('black');
+const msgStyles = ref({
+  color: 'white',
+  backgroundColor: 'black'
+});
+const msgStyles2 = ref({
+  fontSize: '24pt'
+});
+const msgStyles3 = ref({
+  color: 'pink',
+  fontSize: '24pt'
+});
+const textSize = computed(() => {
+  const size = Math.floor(Math.random() * 25) + 10; // 16ptから25ptのランダムなフォントサイズ
+  return `${size}pt`;
 });
 
-const area = computed(() => {
-  return data.radius * data.radius * data.PI;
-});
-
-setInterval(() => {
-  data.radius = Math.round(Math.random() * 10);
-}, 1000);
 </script>
 
 <template>
-  <p>半径{{ data.radius }}の円の面積を円周率{{ data.PI }}で計算すると、{{ area }}</p>
+  <!-- <p><a v-bind:href="url" target="_blank">Vue.js のサイト</a></p>
+  <p><a :href="url" target="_blank">Vue.js のサイト(省略系)</a></p>
+  <p><a v-bind:href="url + 'guide/introduction.html'" target="_blank">Vue.js ガイドのページ</a></p>
+
+  <p><button type="button" v-bind:disabled="isSendButtonDisabled">送信</button></p>
+ -->
+  <!-- <p><img alt="VueLogo" src="./assets/logo.svg" v-bind:[widthOrHeight]="widthOrHeightValue"></p> -->
+
+  <!-- <p><img v-bind="imageAttributes"></p>
+  <p><img v-bind="imageAttributes" title="ロゴです!"></p>
+  <p><img v-bind="imageAttributes" alt="ロゴです!"></p> -->
+
+  <p v-bind:style="{ color: msgTextRed }">
+    {{ msg }}
+  </p>
+  <p v-bind:style="{ color: 'pink' }">
+    {{ msg }}
+  </p>
+  <p v-bind:style="{ fontSize: textSize }">
+    {{ msg }}
+  </p>
+  <p v-bind:style="{ color: msgTextColor, backgroundColor: msgBgColor }">
+    {{ msg }}
+  </p>
+  <p v-bind:style="{ color: msgTextColor, 'background-color': msgBgColor }">
+    {{ msg }}
+  </p>
+  <p v-bind:style="msgStyles">
+    {{ msg }}
+  </p>
+  <p v-bind:style="[msgStyles, msgStyles2]">
+    {{ msg }}
+  </p>
+  <p v-bind:style="[msgStyles, msgStyles3]">
+    {{ msg }}
+  </p>
+  <p v-bind:style="[msgStyles3, msgStyles]">
+    {{ msg }}
+  </p>
 </template>
