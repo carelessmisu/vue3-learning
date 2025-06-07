@@ -1,9 +1,22 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 
-const name = ref('taro yamada');
+const now = new Date();
+const nowstr = now.toLocaleTimeString();
+let timeStr = nowstr;
+const timeStrRef = ref(nowstr);
+
+function changeTime(): void {
+  const newTime = new Date();
+  const newTimeStr = newTime.toLocaleTimeString();
+  timeStr = newTimeStr;
+  timeStrRef.value = newTimeStr;
+}
+
+setInterval(changeTime, 1000);
 </script>
 
 <template>
-  <h1>Hello! {{name}}!</h1>
+  <p>現在時刻：{{timeStr}}</p>
+  <p>現在時刻(ref)：{{timeStrRef}}</p>
 </template>
