@@ -25,12 +25,6 @@ const totalPoints = computed(
 	}
 );
 
-const onIncrementPoint = (id: number) =>{
-	const member = memberList.value.get(id);
-	if (member !== undefined) {
-		member.points++;
-	}
-}
 
 </script>
 
@@ -43,9 +37,8 @@ const onIncrementPoint = (id: number) =>{
 		v-bind:id="id"
 		v-bind:name="member.name"
 		v-bind:email="member.email"
-		v-bind:points="member.points"
+		v-model:points="member.points"
 		v-bind:note="member.note"
-		v-on:incrementPoint="onIncrementPoint"
 	/>
 </template>
 

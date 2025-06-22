@@ -8,28 +8,15 @@ interface Props {
     points: number;
     note?: string;
 }
+const props = withDefaults(
+    defineProps<Props>(),
+    {note: "--"}
+)
 
-interface Emits {
-    (event: "incrementPoint", id:number): void;
-}
+const localPoints = ref(props.points);
 
-const props = defineProps<Props>();
-const emit = defineEmits<Emits>();
-
-// const localPoints = ref(props.points);
-
-const localNote = computed(
-    () => {
-        let localNote = props.note;
-        if (localNote === undefined) {
-            localNote = '--';
-        }
-        return localNote;
-    }
-);
-
-const pointUp = () =>{
-    emit("incrementPoint", props.id);
+const pointUp = () => {
+    localPoints.value++;
 }
 </script>
 
@@ -42,9 +29,9 @@ const pointUp = () =>{
             <dt>メールアドレス</dt>
             <dd>{{ email }}</dd>
             <dt>保有ポイント</dt>
-            <dd>{{ points }}</dd>
+            <dd>{{ localPoints }}</dd>
             <dt>備考</dt>
-            <dd>{{ localNote }}</dd>
+            <dd>{{ note }}</dd>
         </dl>
         <button v-on:click="pointUp">ポイント加算</button>
     </section>
