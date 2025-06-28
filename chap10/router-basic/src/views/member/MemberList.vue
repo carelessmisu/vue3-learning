@@ -21,10 +21,17 @@ const memberList = inject('memberList') as Map<number, Member>;
     </nav>
     <section>
         <h2>会員リスト</h2>
+        <p>
+            新規登録は
+            <RouterLink v-bind:to="{name: 'MemberAdd'}">こちら</RouterLink>
+            から
+        </p>
+        <section>
         <li v-for="[id, member] in memberList" v-bind:key="id">
             <RouterLink v-bind:to="{ name: 'MemberDetail', params: { id: id } }">
                 IDが{{ id }}の{{ member.name }}さん
             </RouterLink>
         </li>
+        </section>
     </section>
 </template>
